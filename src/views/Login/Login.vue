@@ -1,11 +1,12 @@
 <template>
-  <!--路由的出口-->
-  <router-view></router-view>
+  <div>
+    Login.vue
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'Login'
 }
 </script>
 
