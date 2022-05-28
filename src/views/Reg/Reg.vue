@@ -36,7 +36,7 @@
             @click='regNewUser'
           >注册
           </el-button>
-          <el-link type='info' :underline='false'>去登陆</el-link>
+          <el-link type='info' @click="$router.push('/login')">去登陆</el-link>
         </el-form-item>
       </el-form>
     </div>
