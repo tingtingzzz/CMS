@@ -1,42 +1,42 @@
 <template>
   <!-- 注册页面的整体盒子 -->
-  <div class='reg-container'>
+  <div class="reg-container">
     <!-- 注册的盒子 -->
-    <div class='reg-box'>
+    <div class="reg-box">
       <!-- 标题的盒子 -->
-      <div class='title-box'></div>
+      <div class="title-box"></div>
       <!-- 注册的表单区域 -->
-      <el-form style='padding: 0 25px'
-        :model='regForm' :rules='regFormRules' ref='regFormRef'
+      <el-form style="padding: 0 25px"
+        :model="regForm" :rules="regFormRules" ref="regFormRef"
       >
         <!--        用户名-->
-        <el-form-item prop='username'>
-          <el-input placeholder='请输入用户名'
-            prefix-icon='el-icon-user'
-            v-model='regForm.username'
+        <el-form-item prop="username">
+          <el-input placeholder="请输入用户名"
+            prefix-icon="el-icon-user"
+            v-model="regForm.username"
           ></el-input>
         </el-form-item>
         <!--        密码-->
-        <el-form-item prop='password'>
-          <el-input placeholder='请输入密码'
-            prefix-icon='el-icon-unlock'
-            v-model='regForm.password'
+        <el-form-item prop="password">
+          <el-input placeholder="请输入密码"
+            prefix-icon="el-icon-unlock"
+            v-model="regForm.password"
           ></el-input>
         </el-form-item>
         <!--        确认密码-->
-        <el-form-item prop='repassword'>
-          <el-input placeholder='请确认密码'
-            prefix-icon='el-icon-unlock'
-            v-model='regForm.repassword'
+        <el-form-item prop="repassword">
+          <el-input placeholder="请确认密码"
+            prefix-icon="el-icon-unlock"
+            v-model="regForm.repassword"
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button style='width: 100%'
-            type='success' round
-            @click='regNewUser'
+          <el-button style="width: 100%"
+            type="success" round
+            @click="regNewUser"
           >注册
           </el-button>
-          <el-link type='info' @click="$router.push('/login')">去登陆</el-link>
+          <el-link type="info" @click="$router.push('/login')">去登陆</el-link>
         </el-form-item>
       </el-form>
     </div>
@@ -106,7 +106,7 @@ export default {
 }
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .reg-container {
   background: url('../../assets/images/login_bg.jpg') center;
   background-size: cover;

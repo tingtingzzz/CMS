@@ -4,6 +4,8 @@ import Reg from '@/views/Reg/Reg'
 import Login from '@/views/Login/Login'
 import Main from '@/views/Main/Main'
 import Home from '@/views/Menus/Home/Home'
+import UserInfo from '@/views/Menus/User/UserInfo'
+import UserAvatar from '@/views/Menus/User/UserAvatar'
 // 把下面的代码粘贴到路由模块中对应的位置，即可防止路由报错的问题
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {
@@ -26,7 +28,11 @@ const routes = [
     children: [
       {
         path: 'home', component: Home
-      }
+      },
+      {
+        path: 'user-info', component: UserInfo
+      },
+      { path: 'user-avatar', component: UserAvatar }
     ]
   }
 ]
