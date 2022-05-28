@@ -24,11 +24,7 @@ export default new Vuex.Store({
   //异步操作数据的地方
   actions: {
     async initUserinfo (context) {
-      const { data: res } = await axios.get('/my/userinfo', {
-        headers: {
-          Authorization: context.state.token
-        }
-      })
+      const { data: res } = await axios.get('/my/userinfo')
       if (res.code === 0) {
         context.commit('updateUserInfo', res.data)
       }

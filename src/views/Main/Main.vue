@@ -34,11 +34,49 @@
           <img src="../../assets/logo.png" alt="" v-else/>
           <span>{{ userInfo.nickname || userInfo.username }}</span>
         </div>
+        <el-menu
+          default-active="/home"
+          class="el-menu-vertical-demo"
+          background-color="#23262E"
+          text-color="#fff"
+          active-text-color="#409EFF"
+          unique-opened
+          router
+        >
+          <template v-for="item in menusList">
+            <!-- 不包含子菜单的“一级菜单” -->
+            <el-menu-item
+              :index="item.indexPath"
+              :key="item.indexPath"
+              v-if="!item.children"
+            ><i :class="item.icon"></i>
+              {{ item.title }}
+            </el-menu-item>
+            <!-- 包含子菜单的“一级菜单” -->
+            <el-submenu
+              :index="item.indexPath"
+              :key="item.indexPath"
+              v-else
+            >
+              <template slot="title">
+                <i :class="item.icon"></i>
+                <span>{{ item.title }}</span>
+              </template>
+              <el-menu-item
+                :index="childItem.indexPath"
+                :key="childItem.indexPath"
+                v-for="childItem in item.children"
+              ><i :class="childItem.icon"></i>
+                {{ childItem.title }}
+              </el-menu-item>
+            </el-submenu>
+          </template>
+        </el-menu>
       </el-aside>
       <el-container>
         <!-- 页面主体区域 -->
         <el-main>
-          Main.vue后台主页
+          <router-view></router-view>
         </el-main>
         <!-- 底部 footer 区域 -->
         <el-footer>© www.itheima.com - 黑马程序员</el-footer>
@@ -53,13 +91,32 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Main',
+  data () {
+    return {
+      menusList: []
+    }
+  },
   computed: {
-    ...mapState(['userInfo'])
+    ...mapState(['userInfo', 'token'])
   },
   created () {
-    this.$store.dispatch('initUserinfo')
+    if (this.token) {
+      this.$store.dispatch('initUserinfo')
+      //调用函数
+      this.initMenus()
+    } else {
+      this.$router.push('/login')
+    }
   },
   methods: {
+    async initMenus () {
+      //发送请求
+      const { data: res } = await this.$http.get('/my/menus')
+      //把请求成功的数据保存
+      if (res.code === 0) {
+        this.menusList = res.data
+      }
+    },
     logout () {
       this.$confirm('确定要退出嘛', '提示', {
         confirmButtonText: '确定',
