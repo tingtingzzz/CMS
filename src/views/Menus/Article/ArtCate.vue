@@ -3,23 +3,26 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix header-box">
         <span>文章分类</span>
-        <el-button type="primary" size="mini" @click="dialogVisible=true">添加分类</el-button>
+        <el-button type="primary" size="mini" @click="dialogVisible = true"
+        >添加分类
+        </el-button
+        >
       </div>
       <el-table :data="ArtCate" style="width: 100%" border>
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="cate_name" label="分类名称"></el-table-column>
         <el-table-column prop="cate_alias" label="分类别名"></el-table-column>
         <el-table-column label="操作">
-          <template v-slot="{row}">
-            <el-button type="primary" size="mini"
-              @click="showEditDialog(row.id)">修改
+          <template v-slot="{ row }">
+            <el-button
+              type="primary"
+              size="mini"
+              @click="showEditDialog(row.id)"
+            >修改
             </el-button>
-            <el-button type="danger" size="mini"
-              @click="deleteArtCate(row.id)">删除
+            <el-button type="danger" size="mini" @click="deleteArtCate(row.id)"
+            >删除
             </el-button>
           </template>
         </el-table-column>
@@ -39,7 +42,8 @@
         :rules="addFormRules"
         ref="addFormRef"
         label-width="100px"
-        class="demo-ruleForm">
+        class="demo-ruleForm"
+      >
         <el-form-item label="分类名称" prop="cate_name">
           <el-input v-model="addForm.cate_name"></el-input>
         </el-form-item>
@@ -48,12 +52,9 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button
-      type="primary"
-      @click="addArtCate">
-      确 定</el-button>
-  </span>
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addArtCate"> 确 定</el-button>
+      </span>
     </el-dialog>
     <!--    修改文章分类的对话框-->
     <el-dialog
@@ -68,7 +69,8 @@
         :rules="addFormRules"
         ref="editFormRef"
         label-width="100px"
-        class="demo-ruleForm">
+        class="demo-ruleForm"
+      >
         <el-form-item label="分类名称" prop="cate_name">
           <el-input v-model="editForm.cate_name"></el-input>
         </el-form-item>
@@ -77,14 +79,10 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="editDialogVisible = false">取 消</el-button>
-    <el-button
-      type="primary"
-      @click="editArtCate">
-      确 定</el-button>
-  </span>
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editArtCate"> 确 定</el-button>
+      </span>
     </el-dialog>
-
   </div>
 </template>
 
@@ -107,11 +105,19 @@ export default {
       addFormRules: {
         cate_name: [
           { required: true, message: '请输入分类名称', trigger: 'blur' },
-          { pattern: /^\S{1,10}$/, message: '分类名必须是1-10位的非空字符', trigger: 'blur' }
+          {
+            pattern: /^\S{1,10}$/,
+            message: '分类名必须是1-10位的非空字符',
+            trigger: 'blur'
+          }
         ],
         cate_alias: [
           { required: true, message: '请输入分类别名', trigger: 'blur' },
-          { pattern: /^[a-zA-Z\d]{1,15}$/, message: '分类别名必须是1-15位的字母数字', trigger: 'blur' }
+          {
+            pattern: /^[a-zA-Z\d]{1,15}$/,
+            message: '分类别名必须是1-15位的字母数字',
+            trigger: 'blur'
+          }
         ]
       }
     }
@@ -126,27 +132,31 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(async () => {
-        //    确认
-        const { data: res } = await this.$http.delete('/my/cate/del', {
-          params: {
-            id
-          }
-        })
-        if (res.code !== 0) return this.$message.error(res.message)
-        this.$message.success(res.message)
-        await this.initArtCateList()
-      }).catch(() => {
-        //  取消
-        this.$message.warning('速度优化')
       })
+        .then(async () => {
+          //    确认
+          const { data: res } = await this.$http.delete('/my/cate/del', {
+            params: {
+              id
+            }
+          })
+          if (res.code !== 0) return this.$message.error(res.message)
+          this.$message.success(res.message)
+          await this.initArtCateList()
+        })
+        .catch(() => {
+          //  取消
+          this.$message.warning('速度优化')
+        })
     },
     //修改文章分类
     editArtCate () {
-      this.$refs.editFormRef.validate(async valid => {
+      this.$refs.editFormRef.validate(async (valid) => {
         if (!valid) return
         const { data: res } = await this.$http.put(
-          '/my/cate/info', this.editForm)
+          '/my/cate/info',
+          this.editForm
+        )
         if (res.code !== 0) return this.$message.error(res.message)
         this.$message.success(res.message)
         //  关闭对话框
@@ -177,11 +187,12 @@ export default {
     },
     //添加文章分类
     addArtCate () {
-      this.$refs.addFormRef.validate(async valid => {
+      this.$refs.addFormRef.validate(async (valid) => {
         if (!valid) return
         const { data: res } = await this.$http.post(
           '/my/cate/add',
-          this.addForm)
+          this.addForm
+        )
         if (res.code !== 0) return this.$message.error(res.message)
         this.$message.success(res.message)
         this.dialogVisible = false

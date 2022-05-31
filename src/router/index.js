@@ -8,6 +8,7 @@ import UserInfo from '@/views/Menus/User/UserInfo'
 import UserAvatar from '@/views/Menus/User/UserAvatar'
 import UserPwd from '@/views/Menus/User/UserPwd'
 import ArtCate from '@/views/Menus/Article/ArtCate'
+import ArtList from '@/views/Menus/Article/ArtList'
 // 把下面的代码粘贴到路由模块中对应的位置，即可防止路由报错的问题
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {
@@ -32,7 +33,8 @@ const routes = [
       { path: 'user-info', component: UserInfo },
       { path: 'user-avatar', component: UserAvatar },
       { path: 'user-pwd', component: UserPwd },
-      { path: 'art-cate', component: ArtCate }
+      { path: 'art-cate', component: ArtCate },
+      { path: 'art-list', component: ArtList }
     ]
   }
 ]

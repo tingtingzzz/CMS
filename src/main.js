@@ -2,6 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 //引入axios
 import axios from 'axios'
 //引入 ElementUI
@@ -9,7 +14,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/global.less'
 //设置根路径
-axios.defaults.baseURL = 'http://big-event-vue-api-t.itheima.net'
+axios.defaults.baseURL = 'https://big-event-vue-api-t.itheima.net'
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
@@ -40,7 +45,8 @@ axios.interceptors.response.use(function (response) {
 Vue.prototype.$http = axios
 //注册 ElementUI
 Vue.use(ElementUI)
-
+// 全局注册富文本编辑器
+Vue.use(VueQuillEditor)
 Vue.config.productionTip = false
 
 new Vue({
